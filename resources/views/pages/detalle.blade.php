@@ -32,7 +32,18 @@
                 Stock: {{ $producto['existencia'] ?? 'N/A' }} unidades
             </span>
         </p>
-        <a href="{{ route('catalogo') }}" class="btn btn-outline-dark mt-3">← Volver al catálogo</a>
+        <form action="{{ route('carrito.agregar') }}" method="POST" class="mt-3">
+    @csrf
+    <input type="hidden" name="id" value="{{ $producto['id'] }}">
+    <input type="hidden" name="nombre" value="{{ $producto['nombre'] }}">
+    <input type="hidden" name="precio" value="{{ $producto['precio'] }}">
+    <input type="hidden" name="imagen" value="{{ $producto['imagen1'] }}">
+    <button type="submit" class="btn btn-success btn-lg w-100">
+         Agregar al carrito
+    </button>
+</form>
+
+        <a href="{{ route('catalogo') }}" class="btn btn-outline-dark mt-2 w-100">← Volver al catálogo</a>
     </div>
 </div>
 @endif
