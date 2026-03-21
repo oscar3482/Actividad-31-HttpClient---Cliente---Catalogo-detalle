@@ -18,24 +18,33 @@
             </button>
             <div class="collapse navbar-collapse" id="menu">
                <ul class="navbar-nav ms-auto align-items-center">
-                <li class="nav-item"><a class="nav-link" href="{{ route('inicio') }}">Inicio</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ route('nosotros') }}">Nosotros</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ route('catalogo') }}">Catálogo</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ route('contacto') }}">Contacto</a></li>
-                <li class="nav-item ms-3">
-                <a class="btn btn-outline-light position-relative" href="{{ route('carrito') }}">
-                🛒  
-                @php 
-                    $totalCarrito = array_sum(array_column(session()->get('carrito', []), 'cantidad')); 
-                @endphp
-                @if($totalCarrito > 0)
-                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+    <li class="nav-item"><a class="nav-link" href="{{ route('inicio') }}">Inicio</a></li>
+    <li class="nav-item"><a class="nav-link" href="{{ route('nosotros') }}">Nosotros</a></li>
+    <li class="nav-item"><a class="nav-link" href="{{ route('catalogo') }}">Catálogo</a></li>
+    <li class="nav-item"><a class="nav-link" href="{{ route('contacto') }}">Contacto</a></li>
+
+    @if(session('token'))
+        <li class="nav-item"><a class="nav-link" href="{{ route('pedidos') }}">📦 Mis Pedidos</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ route('logout') }}">Salir ({{ session('user_name') }})</a></li>
+    @else
+        <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Iniciar Sesión</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ route('register') }}">Registrarse</a></li>
+    @endif
+
+    <li class="nav-item ms-3">
+        <a class="btn btn-outline-light position-relative" href="{{ route('carrito') }}">
+            🛒
+            @php 
+                $totalCarrito = array_sum(array_column(session()->get('carrito', []), 'cantidad')); 
+            @endphp
+            @if($totalCarrito > 0)
+            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                 {{ $totalCarrito }}
-                </span>
-             @endif
-                </a>
-             </li>
-                </ul>
+            </span>
+            @endif
+        </a>
+    </li>
+</ul>
             </div>
         </div>
     </nav>

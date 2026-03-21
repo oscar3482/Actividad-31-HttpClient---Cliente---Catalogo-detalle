@@ -63,8 +63,23 @@
 {{-- Botones --}}
 <div class="d-flex justify-content-between mt-3">
     <a href="{{ route('catalogo') }}" class="btn btn-outline-dark">← Seguir comprando</a>
-    <a href="{{ route('carrito.vaciar') }}" class="btn btn-danger"
-       onclick="return confirm('¿Vaciar todo el carrito?')"> Vaciar carrito</a>
+    <div class="d-flex gap-2">
+        <a href="{{ route('carrito.vaciar') }}" class="btn btn-danger"
+           onclick="return confirm('¿Vaciar todo el carrito?')">🗑 Vaciar carrito</a>
+        @if(session('token'))
+            <form action="{{ route('pedidos.store') }}" method="POST">
+                @csrf
+                <button type="submit" class="btn btn-success"
+                        onclick="return confirm('¿Confirmar pedido?')">
+                    Finalizar compra
+                </button>
+            </form>
+        @else
+            <a href="{{ route('login') }}" class="btn btn-success">
+                Inicia sesión para comprar
+            </a>
+        @endif
+    </div>
 </div>
 
 @endif

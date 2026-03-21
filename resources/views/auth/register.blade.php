@@ -1,0 +1,41 @@
+@extends('layouts.app')
+
+@section('title', 'Registro')
+
+@section('content')
+<div class="row justify-content-center">
+    <div class="col-md-5">
+        <div class="card shadow">
+            <div class="card-body p-4">
+                <h2 class="fw-bold text-center mb-4">Crear Cuenta</h2>
+
+                @if(session('error'))
+                    <div class="alert alert-danger">{{ session('error') }}</div>
+                @endif
+
+                <form action="{{ route('register.post') }}" method="POST">
+                    @csrf
+                    <div class="mb-3">
+                        <label class="form-label">Nombre completo</label>
+                        <input type="text" name="name" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Correo electrónico</label>
+                        <input type="email" name="email" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Contraseña</label>
+                        <input type="password" name="password" class="form-control" required>
+                    </div>
+                    <button type="submit" class="btn btn-dark w-100">Registrarse</button>
+                </form>
+
+                <hr>
+                <p class="text-center mb-0">¿Ya tienes cuenta? 
+                    <a href="{{ route('login') }}">Inicia sesión</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
