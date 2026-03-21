@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="text-center py-5">
-    <h1 class="display-4 fw-bold">Bienvenido a Mi Tienda </h1>
+    <h1 class="display-4 fw-bold">Bienvenido a ElectroShop </h1>
     <p class="lead text-muted">Encuentra los mejores productos al mejor precio.</p>
     <a href="{{ route('catalogo') }}" class="btn btn-dark btn-lg mt-3">Ver Catálogo</a>
 </div>

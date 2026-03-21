@@ -6,6 +6,7 @@ use App\Http\Controllers\ProductosController;
 use App\Http\Controllers\CarritoController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PedidoController;
+use App\Http\Controllers\PerfilController;
 
 // Páginas públicas
 Route::get('/', [PaginasController::class, 'inicio'])->name('inicio');
@@ -33,3 +34,9 @@ Route::get('/pedidos', [PedidoController::class, 'index'])->name('pedidos');
 Route::post('/pedidos', [PedidoController::class, 'store'])->name('pedidos.store');
 Route::get('/pedidos/{id}', [PedidoController::class, 'show'])->name('pedidos.show');
 Route::get('/pedidos/{id}/cancelar', [PedidoController::class, 'cancelar'])->name('pedidos.cancelar');
+
+// Perfil
+Route::get('/perfil', [PerfilController::class, 'index'])->name('perfil');
+Route::post('/perfil/datos', [PerfilController::class, 'actualizarDatos'])->name('perfil.datos');
+Route::post('/perfil/imagen', [PerfilController::class, 'actualizarImagen'])->name('perfil.imagen');
+Route::post('/perfil/password', [PerfilController::class, 'actualizarPassword'])->name('perfil.password');
