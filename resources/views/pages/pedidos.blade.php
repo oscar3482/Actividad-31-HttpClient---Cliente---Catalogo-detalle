@@ -13,6 +13,13 @@
     <div class="alert alert-danger">{{ session('error') }}</div>
 @endif
 
+@if(request('success'))
+    <div class="alert alert-success">{{ request('success') }}</div>
+@endif
+@if(request('error'))
+    <div class="alert alert-danger">{{ request('error') }}</div>
+@endif
+
 @if(empty($pedidos))
     <div class="alert alert-warning">
         No tienes pedidos aún. <a href="{{ route('catalogo') }}">Ver productos</a>
@@ -43,13 +50,18 @@
                 </td>
                 <td>${{ number_format($pedido['total'], 2) }}</td>
                 <td class="d-flex gap-2">
-                    <a href="{{ route('pedidos.show', $pedido['id']) }}" 
-                       class="btn btn-sm btn-primary">Ver detalle</a>
-                    @if($pedido['estado'] === 'pendiente')
-                        <a href="{{ route('pedidos.cancelar', $pedido['id']) }}"
-                           class="btn btn-sm btn-danger"
-                           onclick="return confirm('¿Cancelar este pedido?')">Cancelar</a>
+                   <a href="{{ route('pedidos.show', $pedido['id']) }}" 
+                    class="btn btn-sm btn-primary">Ver detalle</a>
+
+                    @if($pedido['estado'] !== 'cancelado' && $pedido['estado_pago'] !== 'pagado')
+                    <a href="{{ route('pedidos.pagar', $pedido['id']) }}"
+                    class="btn btn-sm btn-success"
+                    onclick="return confirm('¿Proceder al pago con PayPal?')">Pagar</a>
                     @endif
+
+@if($pedido['estado_pago'] === 'pagado')
+    <span class="badge bg-success">Pagado</span>
+@endif
                 </td>
             </tr>
             @endforeach

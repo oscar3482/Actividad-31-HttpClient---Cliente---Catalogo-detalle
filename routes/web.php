@@ -7,6 +7,7 @@ use App\Http\Controllers\CarritoController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\PerfilController;
+use App\Http\Controllers\PagoController;
 
 // Páginas públicas
 Route::get('/', [PaginasController::class, 'inicio'])->name('inicio');
@@ -40,3 +41,6 @@ Route::get('/perfil', [PerfilController::class, 'index'])->name('perfil');
 Route::post('/perfil/datos', [PerfilController::class, 'actualizarDatos'])->name('perfil.datos');
 Route::post('/perfil/imagen', [PerfilController::class, 'actualizarImagen'])->name('perfil.imagen');
 Route::post('/perfil/password', [PerfilController::class, 'actualizarPassword'])->name('perfil.password');
+
+//pagos 
+Route::get('/pedidos/{id}/pagar', [PagoController::class, 'iniciarPago'])->name('pedidos.pagar');

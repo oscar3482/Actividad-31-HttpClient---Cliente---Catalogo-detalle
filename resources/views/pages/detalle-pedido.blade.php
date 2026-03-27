@@ -13,12 +13,25 @@
     <div class="card-body">
         <p><strong>Fecha:</strong> {{ \Carbon\Carbon::parse($pedido['created_at'])->format('d/m/Y H:i') }}</p>
         <p><strong>Estado:</strong> 
-            @if($pedido['estado'] === 'pendiente')
-                <span class="badge bg-success">Pendiente</span>
-            @else
-                <span class="badge bg-danger">Cancelado</span>
-            @endif
-        </p>
+    @if($pedido['estado'] === 'pendiente')
+        <span class="badge bg-success">Pendiente</span>
+    @else
+        <span class="badge bg-danger">Cancelado</span>
+    @endif
+</p>
+
+<p><strong>Estado de pago:</strong>
+    @if($pedido['estado_pago'] === 'pagado')
+        <span class="badge bg-success">Pagado</span>
+    @else
+        <span class="badge bg-warning text-dark">Pendiente de pago</span>
+    @endif
+</p>
+
+@if($pedido['estado_pago'] === 'pagado')
+    <p><strong>Transacción:</strong> {{ $pedido['transaccion_id'] }}</p>
+    <p><strong>Fecha de pago:</strong> {{ \Carbon\Carbon::parse($pedido['fecha_pago'])->format('d/m/Y H:i') }}</p>
+@endif
         <p><strong>Total:</strong> <span class="text-success fw-bold">${{ number_format($pedido['total'], 2) }}</span></p>
     </div>
 </div>
